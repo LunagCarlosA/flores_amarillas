@@ -62,36 +62,37 @@
       justify-content: center;
       width: 100%;
       max-width: 500px;
-      margin: 40px auto 50px auto;
-      z-index: 100; /* Prioridad máxima por encima de las burbujas */
+      margin: 60px auto 50px auto;
+      z-index: 100;
     }
 
-    /* Tarjeta Principal superpuesta al frente */
+    /* Tarjeta Principal con más transparencia para ver la foto de fondo */
     .main-card {
-      background: rgba(23, 37, 65, 0.85);
-      backdrop-filter: blur(8px);
+      background: rgba(23, 37, 65, 0.45); /* Mayor transparencia */
+      backdrop-filter: blur(4px);
       border: 3px solid rgba(250, 204, 21, 0.6);
       border-radius: 20px;
-      padding: 35px 30px;
+      padding: 45px 30px 35px 30px;
       width: 100%;
       text-align: center;
       box-shadow: 0 0 25px rgba(250, 204, 21, 0.3), 0 10px 30px rgba(0, 0, 0, 0.6);
       position: relative;
-      z-index: 101; /* Asegura estar en el nivel más alto */
+      z-index: 101;
     }
 
     .main-card h2 {
       color: #facc15;
       font-size: 1.8rem;
       margin-bottom: 15px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     }
 
     .main-card p {
       font-size: 1rem;
       line-height: 1.6;
-      color: #cbd5e1;
+      color: #ffffff; /* Texto 100% opaco */
       margin-bottom: 25px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9);
     }
 
     .btn {
@@ -113,11 +114,10 @@
       box-shadow: 0 6px 20px rgba(250, 204, 21, 0.6);
     }
 
-    /* Burbujas laterales de los personajes */
+    /* Burbujas laterales/superiores de los personajes */
     .character-bubble {
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
+      top: -40px; /* Posicionadas en la parte superior */
       border-radius: 50%;
       overflow: hidden;
       z-index: 102;
@@ -151,15 +151,15 @@
     }
 
     .bob-bubble {
-      width: 140px;
-      height: 140px;
-      left: -100px;
+      width: 120px;
+      height: 120px;
+      left: -20px;
     }
 
     .sandy-bubble {
-      width: 140px;
-      height: 140px;
-      right: -100px;
+      width: 120px;
+      height: 120px;
+      right: -20px;
     }
 
     /* Galería de Burbujas Flotantes */
@@ -170,7 +170,7 @@
       width: 100vw;
       height: 100vh;
       pointer-events: none;
-      z-index: 4; /* Mantener por debajo de la tarjeta */
+      z-index: 4;
     }
 
     .bubble {
@@ -189,13 +189,11 @@
       opacity: 0;
     }
 
-    /* Diferentes tamaños */
     .bubble.size-sm { width: 130px; height: 130px; }
     .bubble.size-md { width: 170px; height: 170px; }
     .bubble.size-lg { width: 220px; height: 220px; }
     .bubble.size-xl { width: 260px; height: 260px; }
 
-    /* Recorridos personalizados por toda la pantalla con desfasamiento de tiempo */
     .bubble:nth-child(1) {
       top: 10%; left: 5%;
       animation-duration: 12s;
@@ -232,7 +230,6 @@
       --tx-end: 40vw; --ty-end: 40vh;
     }
 
-    /* Animación de aparecer/desaparecer con movimiento continuo amplio por la pantalla */
     @keyframes popAndFadeWide {
       0% {
         opacity: 0;
@@ -305,14 +302,16 @@
         max-width: 82%;
       }
       .bob-bubble {
-        width: 90px;
-        height: 90px;
-        left: -50px;
+        width: 80px;
+        height: 80px;
+        left: -15px;
+        top: -30px;
       }
       .sandy-bubble {
-        width: 90px;
-        height: 90px;
-        right: -50px;
+        width: 80px;
+        height: 80px;
+        right: -15px;
+        top: -30px;
       }
       .bubble.size-sm { width: 90px; height: 90px; }
       .bubble.size-md { width: 120px; height: 120px; }
@@ -331,12 +330,12 @@
 
   <!-- Sección Central -->
   <div class="hero-wrapper">
-    <!-- Burbuja Bob Esponja a la izquierda -->
+    <!-- Burbuja Bob Esponja en la parte superior izquierda -->
     <div class="character-bubble bob-bubble">
       <img src="el.jpg" alt="Bob Esponja">
     </div>
 
-    <!-- Tarjeta Principal -->
+    <!-- Tarjeta Principal con transparencia ajustada -->
     <div class="main-card">
       <h2>¡Para Ti, Arenita! 🌻</h2>
       <p>
@@ -345,7 +344,7 @@
       <button class="btn" onclick="createFlowerRain()">¡Enviar más Flores de Fondo de Bikini! 🌼</button>
     </div>
 
-    <!-- Burbuja Arenita a la derecha -->
+    <!-- Burbuja Arenita en la parte superior derecha -->
     <div class="character-bubble sandy-bubble">
       <img src="ella.jpg" alt="Arenita">
     </div>
