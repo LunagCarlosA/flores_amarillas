@@ -111,30 +111,56 @@
       box-shadow: 0 6px 20px rgba(250, 204, 21, 0.6);
     }
 
-    /* Ajuste de personajes y mezcla de color para disimular fondo blanco */
-    .character {
+    /* Burbujas laterales de los personajes */
+    .character-bubble {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      height: auto;
+      border-radius: 50%;
+      overflow: hidden;
       z-index: 5;
+      border: 4px solid #ffffff;
+      outline: 3px solid rgba(250, 204, 21, 0.8);
+      box-shadow: 
+        0 0 20px rgba(250, 204, 21, 0.5),
+        0 0 35px rgba(100, 200, 255, 0.6),
+        inset 0 0 15px rgba(255, 255, 255, 0.6);
+    }
+
+    .character-bubble img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .character-bubble::after {
+      content: "";
+      position: absolute;
+      top: 12%;
+      left: 12%;
+      width: 28%;
+      height: 28%;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      filter: blur(3px);
       pointer-events: none;
-      /* Oculta/mezcla fondos claros o blancos */
-      mix-blend-mode: multiply;
-      filter: contrast(110%) brightness(105%);
     }
 
-    .bob {
-      width: 150px;
-      left: -110px;
+    .bob-bubble {
+      width: 140px;
+      height: 140px;
+      left: -100px;
     }
 
-    .sandy {
-      width: 130px;
-      right: -90px;
+    .sandy-bubble {
+      width: 140px;
+      height: 140px;
+      right: -100px;
     }
 
-    /* Burbujas flotantes con marco degradado y efecto Neón */
+    /* Burbujas flotantes por la pantalla */
     .photo-gallery {
       position: fixed;
       top: 0;
@@ -150,7 +176,6 @@
       border-radius: 50%;
       overflow: hidden;
       pointer-events: auto;
-      /* Marco brillante de doble borde */
       border: 4px solid #ffffff;
       outline: 3px solid rgba(250, 204, 21, 0.8);
       box-shadow: 
@@ -245,13 +270,15 @@
       .hero-wrapper {
         max-width: 82%;
       }
-      .bob {
-        width: 100px;
-        left: -55px;
+      .bob-bubble {
+        width: 90px;
+        height: 90px;
+        left: -50px;
       }
-      .sandy {
-        width: 85px;
-        right: -45px;
+      .sandy-bubble {
+        width: 90px;
+        height: 90px;
+        right: -50px;
       }
       .bubble.size-sm { width: 90px; height: 90px; }
       .bubble.size-md { width: 120px; height: 120px; }
@@ -270,10 +297,12 @@
 
   <!-- Sección Central -->
   <div class="hero-wrapper">
-    <!-- Bob Esponja a la izquierda -->
-    <img class="character bob" src="bobEsponja.png" alt="Bob Esponja con Uculele">
+    <!-- Burbuja Bob Esponja a la izquierda -->
+    <div class="character-bubble bob-bubble">
+      <img src="el.jpg" alt="Bob Esponja">
+    </div>
 
-    <!-- Tarjeta Principal con marco brillante -->
+    <!-- Tarjeta Principal -->
     <div class="main-card">
       <h2>¡Para Ti, Arenita! 🌻</h2>
       <p>
@@ -282,8 +311,10 @@
       <button class="btn" onclick="createFlowerRain()">¡Enviar más Flores de Fondo de Bikini! 🌼</button>
     </div>
 
-    <!-- Arenita a la derecha -->
-    <img class="character sandy" src="arenita.png" alt="Arenita Mejilla">
+    <!-- Burbuja Arenita a la derecha -->
+    <div class="character-bubble sandy-bubble">
+      <img src="ella.jpg" alt="Arenita">
+    </div>
   </div>
 
   <!-- Burbujas Flotantes con Marcos -->
