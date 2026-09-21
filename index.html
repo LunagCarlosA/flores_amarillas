@@ -1,150 +1,254 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>¡Para Ti, Arenita! 🌻</title>
-<style>
-  body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #fff9db; /* Amarillo pálido de fondo */
-    color: #333;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Para Ti, Arenita! 🌻</title>
+  <style>
+    :root {
+      --amarillo-girasol: #ffcc00;
+      --dorado-calido: #ffa500;
+      --fondo-suave: #fffdf0;
+      --texto-oscuro: #2c2c2c;
+    }
 
-  /* --- Sección de Portada (Fondo) --- */
-  .portada {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* Ocupa todo el alto de la pantalla */
-    background-image: url('image_0.png'); /* TU FOTO DE FONDO */
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-  }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  .cabecera {
-    background: rgba(0,0,0,0.6);
-    padding: 20px 40px;
-    border-radius: 15px;
-    text-align: center;
-  }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--fondo-suave);
+      color: var(--texto-oscuro);
+      overflow-x: hidden;
+    }
 
-  h2 {
-    color: #ffd700; /* Dorado para el nombre */
-    margin-top: 0;
-  }
+    /* --- PORTADA CON FOTO DE FONDO --- */
+    .hero-header {
+      position: relative;
+      min-height: 85vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55)), 
+                  url('foto1.jpg') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }
 
-  .boton {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-top: 20px;
-    background-color: #ffd700;
-    color: #333;
-    text-decoration: none;
-    border-radius: 25px;
-    font-weight: bold;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-  }
+    .hero-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 30px 25px;
+      border-radius: 24px;
+      max-width: 650px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      animation: fadeIn 1.2s ease-out;
+    }
 
-  /* --- Sección de Galería (Fotos Mejoradas) --- */
-  .galeria {
-    padding: 50px 20px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 30px; /* Espacio entre fotos */
-  }
+    .personajes-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
 
-  .foto-petalo {
-    position: relative;
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    overflow: hidden;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    
-    /* Animación base */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
+    .personajes-header img {
+      width: 55px;
+      height: 55px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+    }
 
-  /* Imagen dentro del pétalo */
-  .foto-petalo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ajusta la foto sin deformarla */
-  }
+    .hero-card h1 {
+      font-size: 2.2rem;
+      color: var(--amarillo-girasol);
+      margin-bottom: 12px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    }
 
-  /* --- Marco Floral (con pseudo-elemento) --- */
-  .foto-petalo::after {
-    content: '';
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    right: -5px;
-    bottom: -5px;
-    border: 5px solid transparent;
-    border-radius: 50%;
-    /* Reemplaza con una URL de marco floral real si tienes una */
-    border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="10" r="10" fill="yellow" stroke="gold" stroke-width="2"/><circle cx="90" cy="50" r="10" fill="yellow" stroke="gold" stroke-width="2"/><circle cx="50" cy="90" r="10" fill="yellow" stroke="gold" stroke-width="2"/><circle cx="10" cy="50" r="10" fill="yellow" stroke="gold" stroke-width="2"/><circle cx="30" cy="30" r="8" fill="lightyellow" stroke="goldenrod" stroke-width="1.5"/><circle cx="70" cy="30" r="8" fill="lightyellow" stroke="goldenrod" stroke-width="1.5"/><circle cx="70" cy="70" r="8" fill="lightyellow" stroke="goldenrod" stroke-width="1.5"/><circle cx="30" cy="70" r="8" fill="lightyellow" stroke="goldenrod" stroke-width="1.5"/></svg>') 30;
-    pointer-events: none; /* No interfiere con el clic */
-  }
+    .hero-card p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    }
 
-  /* --- Animaciones al Tocar (Hover) --- */
-  .foto-petalo:hover {
-    transform: scale(1.1) rotate(5deg); /* Crece y gira un poco */
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-  }
+    .btn-flores {
+      display: inline-block;
+      background: linear-gradient(135deg, #ffcc00, #ffa500);
+      color: #000;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 50px;
+      box-shadow: 0 6px 20px rgba(255, 204, 0, 0.4);
+      transition: all 0.3s ease;
+    }
 
-  /* --- Estilo Específico de las Fotos de Arena --- */
-  /* Puedes ajustar esto para cada foto si lo necesitas */
-  .foto-arena {
-    /* Por ejemplo, ajustar la posición si están cortadas */
-  }
+    .btn-flores:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(255, 204, 0, 0.6);
+    }
 
-</style>
+    /* --- SECCIÓN GALERÍA ESTILO GIRASOL --- */
+    .seccion-girasol {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .seccion-girasol h2 {
+      font-size: 1.8rem;
+      color: #b38600;
+      margin-bottom: 40px;
+    }
+
+    /* Grid que imita la flor */
+    .girasol-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 35px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Contenedor de cada foto/pétalo */
+    .petalo-item {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      padding: 8px;
+      background: linear-gradient(135deg, #ffe066, #ffa500);
+      box-shadow: 0 8px 20px rgba(218, 165, 32, 0.3);
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    }
+
+    /* Imagen dentro del pétalo */
+    .petalo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #fff;
+    }
+
+    /* Marco Floral simulado con borde punteado brillante */
+    .petalo-item::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      right: -6px;
+      bottom: -6px;
+      border: 3px dashed var(--amarillo-girasol);
+      border-radius: 50%;
+      animation: girarMarco 20s linear infinite;
+    }
+
+    /* Animación al tocar o pasar el mouse sobre la foto */
+    .petalo-item:hover, .petalo-item:active {
+      transform: scale(1.15) rotate(3deg);
+      box-shadow: 0 15px 30px rgba(255, 165, 0, 0.5);
+      z-index: 10;
+    }
+
+    /* Destacar la foto juntos como el centro del girasol */
+    .petalo-item.centro {
+      width: 250px;
+      height: 250px;
+      background: linear-gradient(135deg, #ffa500, #cc7a00);
+      order: 0;
+    }
+
+    /* Pie de página */
+    footer {
+      text-align: center;
+      padding: 25px;
+      background-color: #fff3b0;
+      color: #665200;
+      font-size: 0.9rem;
+    }
+
+    /* Animaciones */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes girarMarco {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsivo para celulares */
+    @media (max-width: 600px) {
+      .hero-card h1 { font-size: 1.8rem; }
+      .petalo-item { width: 170px; height: 170px; }
+      .petalo-item.centro { width: 190px; height: 190px; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Portada Principal -->
-  <div class="portada">
-    <div class="cabecera">
-      <p>💛 🌻 💛 🌻</p>
-      <h2>¡Para Ti, Arenita! 🌻</h2>
-      <p>Un girasol digital y una aventura submarina para iluminar tu día.</p>
-      <p>Tu sonrisa brilla con la misma fuerza que el sol de Fondo de Bikini. ¡Gracias por existir!</p>
-      <a href="#" class="boton">¡Enviar más Flores de Fondo de Bikini! 🌼</a>
+  <!-- 1. PORTADA CON FOTO DE FONDO -->
+  <header class="hero-header">
+    <div class="hero-card">
+      <div class="personajes-header">
+        <!-- Bob Esponja -->
+        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/SpongeBob_SquarePants_character.svg" alt="Bob Esponja">
+        <span>🌻</span>
+        <!-- Arenita -->
+        <img src="https://upload.wikimedia.org/wikipedia/en/a/a0/Sandy_Cheeks.svg" alt="Arenita">
+      </div>
+      
+      <h1>¡Para Ti, Arenita! 🌻</h1>
+      <p>Un girasol digital y una aventura submarina para iluminar tu día.<br>
+      Tu sonrisa brilla con la misma fuerza que el sol de Fondo de Bikini. ¡Gracias por existir!</p>
+      
+      <a href="#galeria" class="btn-flores">¡Ver las Flores de Fondo de Bikini! 🌼</a>
     </div>
-  </div>
+  </header>
 
-  <!-- Galería de Fotos como Pétalos -->
-  <div class="galeria">
-    <!-- Foto Juntos -->
-    <div class="foto-petalo" onclick="console.log('Click en Foto Juntos')">
-      <img src="imagen1.png" alt="Foto Juntos">
-    </div>
+  <!-- 2. GALERÍA INTERACTIVA DE FOTOS (ESTILO PÉTALOS) -->
+  <section class="seccion-girasol" id="galeria">
+    <h2>Toca cada pétalo para ver el recuerdo ✨</h2>
+    
+    <div class="girasol-grid">
+      <!-- Centro: Foto juntos -->
+      <div class="petalo-item centro" title="Nosotros">
+        <img src="foto1.jpg" alt="Foto juntos bajo las flores">
+      </div>
 
-    <!-- Arenita 1 (Arenita de espaldas) -->
-    <div class="foto-petalo foto-arena" onclick="console.log('Click en Arenita 1')">
-      <img src="imagen2.png" alt="Arenita De Espaldas">
-    </div>
+      <!-- Pétalo 1: Foto 2 -->
+      <div class="petalo-item" title="En el campo de flores">
+        <img src="foto2.jpg" alt="Arenita de espaldas en el campo">
+      </div>
 
-    <!-- Arenita 2 (Arenita sonriendo) -->
-    <div class="foto-petalo foto-arena" onclick="console.log('Click en Arenita 2')">
-      <img src="imagen3.png" alt="Arenita Sonriendo">
-    </div>
+      <!-- Pétalo 2: Foto 3 -->
+      <div class="petalo-item" title="Tu sonrisa">
+        <img src="foto3.jpg" alt="Arenita sonriendo">
+      </div>
 
-    <!-- Arenita 3 (Arenita perfil) -->
-    <div class="foto-petalo foto-arena" onclick="console.log('Click en Arenita 3')">
-      <img src="imagen4.png" alt="Arenita De Perfil">
+      <!-- Pétalo 3: Foto 4 -->
+      <div class="petalo-item" title="Entre los girasoles">
+        <img src="foto4.jpg" alt="Arenita de perfil en las flores">
+      </div>
     </div>
-  </div>
+  </section>
+
+  <footer>
+    <p>Hecho con 💛 para la mejor ardillita de Fondo de Bikini</p>
+  </footer>
 
 </body>
 </html>
