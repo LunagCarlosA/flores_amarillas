@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -13,9 +13,12 @@
 
     body {
       min-height: 100vh;
-      background-color: #0b1325;
-      background-image: 
-        radial-gradient(circle at 50% 30%, #172a4d 0%, #0b1325 70%);
+      /* --- NUEVO: FONDO CON TU FOTO --- */
+      background-image: url('foto2.jpg'); /* Usamos tu foto de campo */
+      background-size: cover; /* Para que cubra toda la pantalla */
+      background-position: center center;
+      background-attachment: fixed; /* Mantiene el fondo fijo al hacer scroll */
+      /* -------------------------------- */
       color: #ffffff;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
@@ -27,13 +30,14 @@
       position: relative;
     }
 
-    /* Fondo de flores y corazones flotantes */
+    /* Fondo animado sutil de flores y corazones */
     .bg-element {
       position: absolute;
       user-select: none;
       pointer-events: none;
-      opacity: 0.8;
+      opacity: 0.9; /* Un poco más visible sobre la foto */
       animation: float 4s ease-in-out infinite alternate;
+      z-index: 1; /* Detrás de todo */
     }
 
     @keyframes float {
@@ -51,6 +55,7 @@
       max-width: 900px;
       margin-top: 20px;
       margin-bottom: 50px;
+      z-index: 10;
     }
 
     .character {
@@ -68,16 +73,17 @@
       margin-left: -40px;
     }
 
+    /* Tarjeta Central: Retocada para que resalte sobre la foto de fondo */
     .main-card {
-      background: rgba(23, 37, 65, 0.85);
+      background: rgba(17, 24, 39, 0.88); /* Más oscuro y opaco */
       backdrop-filter: blur(12px);
-      border: 2px solid rgba(250, 204, 21, 0.3);
+      border: 2px solid rgba(250, 204, 21, 0.5); /* Borde amarillo más visible */
       border-radius: 20px;
       padding: 30px 40px;
       max-width: 450px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
       z-index: 3;
     }
 
@@ -85,12 +91,13 @@
       color: #facc15;
       font-size: 1.8rem;
       margin-bottom: 15px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
 
     .main-card p {
       font-size: 1rem;
       line-height: 1.6;
-      color: #cbd5e1;
+      color: #e2e8f0;
       margin-bottom: 25px;
     }
 
@@ -104,47 +111,46 @@
       border-radius: 25px;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(250, 204, 21, 0.4);
+      box-shadow: 0 4px 15px rgba(250, 204, 21, 0.5);
     }
 
     .btn:hover {
       background-color: #fef08a;
       transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(250, 204, 21, 0.6);
+      box-shadow: 0 6px 20px rgba(250, 204, 21, 0.7);
     }
 
-    /* Galería de Fotos Abajo */
+    /* Galería de Fotos Abajo: Animación y Bordes */
     .photo-gallery {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 20px;
+      gap: 25px;
       flex-wrap: wrap;
       width: 100%;
       max-width: 1100px;
-      z-index: 4;
+      z-index: 10;
+      margin-bottom: 30px;
     }
 
     .photo-card {
-      background: #facc15;
-      padding: 8px;
+      background: rgba(17, 24, 39, 0.7); /* Fondo de tarjeta sutil */
+      backdrop-filter: blur(5px);
+      padding: 10px;
       border-radius: 18px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-      transition: transform 0.3s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transition: all 0.3s ease;
       width: 220px;
+      border: 2px solid rgba(250, 204, 21, 0.2); /* Borde sutil */
     }
 
+    /* --- NUEVO: FOTOS MÁS ANIMADAS --- */
     .photo-card:hover {
-      transform: translateY(-8px) scale(1.03);
+      transform: translateY(-12px) scale(1.05) rotate(1deg); /* Más movimiento */
+      border: 2px solid rgba(250, 204, 21, 0.8); /* Resalta el borde */
+      box-shadow: 0 15px 35px rgba(250, 204, 21, 0.4);
     }
-
-    .photo-card.circle {
-      border-radius: 50%;
-      width: 200px;
-      height: 200px;
-      padding: 6px;
-      overflow: hidden;
-    }
+    /* ---------------------------------- */
 
     .photo-card img {
       width: 100%;
@@ -154,16 +160,11 @@
       display: block;
     }
 
-    .photo-card.circle img {
-      height: 100%;
-      border-radius: 50%;
-    }
-
-    /* Animación de Flores cayendo al hacer clic */
+    /* Lluvia de Flores interactiva (más intensa) */
     .falling-flower {
       position: fixed;
       top: -20px;
-      font-size: 24px;
+      font-size: 26px;
       user-select: none;
       pointer-events: none;
       z-index: 100;
@@ -176,13 +177,18 @@
       }
     }
 
+    /* Soporte para móviles */
     @media (max-width: 768px) {
       .hero-wrapper {
         flex-direction: column;
       }
       .bob, .sandy {
         margin: 0;
-        width: 130px;
+        width: 140px;
+      }
+      .main-card {
+        max-width: 90%;
+        padding: 20px;
       }
       .photo-gallery {
         gap: 15px;
@@ -196,15 +202,15 @@
 <body>
 
   <!-- Flores y Corazones Decorativos de Fondo -->
-  <div class="bg-element" style="top: 8%; left: 10%; font-size: 2rem;">💛</div>
-  <div class="bg-element" style="top: 12%; left: 22%; font-size: 1.8rem;">🌻</div>
-  <div class="bg-element" style="top: 6%; right: 15%; font-size: 2rem;">💛</div>
-  <div class="bg-element" style="top: 15%; right: 25%; font-size: 1.8rem;">🌻</div>
+  <div class="bg-element" style="top: 8%; left: 10%; font-size: 2.2rem;">💛</div>
+  <div class="bg-element" style="top: 15%; left: 25%; font-size: 2rem;">🌻</div>
+  <div class="bg-element" style="top: 6%; right: 15%; font-size: 2.2rem;">💛</div>
+  <div class="bg-element" style="top: 18%; right: 30%; font-size: 2rem;">🌻</div>
 
-  <!-- Sección Principal -->
+  <!-- Sección Principal con Bob, Arenita y Tarjeta -->
   <div class="hero-wrapper">
-    <!-- Ilustración Bob Esponja -->
-    <img class="character bob" src="https://upload.wikimedia.org/wikipedia/en/3/3b/SpongeBob_SquarePants_character.svg" alt="Bob Esponja">
+    <!-- Bob Esponja: Usamos imagen directo de su wiki oficial para asegurar carga -->
+    <img class="character bob" src="https://assets.nick.com/uri/mgid:arc:imageassetref:shared.nick.com:a60d6258-8422-4217-a065-2766028a381a?quality=0.7&gen=nt&width=400&height=400&crop=true" alt="Bob Esponja">
 
     <!-- Tarjeta Central -->
     <div class="main-card">
@@ -215,41 +221,43 @@
       <button class="btn" onclick="createFlowerRain()">¡Enviar más Flores de Fondo de Bikini! 🌼</button>
     </div>
 
-    <!-- Ilustración Arenita -->
-    <img class="character sandy" src="https://upload.wikimedia.org/wikipedia/en/a/a0/Sandy_Cheeks.svg" alt="Arenita">
+    <!-- Arenita: Usamos imagen directo de su wiki oficial -->
+    <img class="character sandy" src="https://assets.nick.com/uri/mgid:arc:imageassetref:shared.nick.com:c791d211-1376-47a3-b0e6-591781297d21?quality=0.7&gen=nt&width=400&height=400&crop=true" alt="Arenita">
   </div>
 
-  <!-- Galería de Fotografías -->
+  <!-- Galería de Fotografías con Efectos Animados -->
   <div class="photo-gallery">
-    <div class="photo-card circle">
-      <img src="foto1.jpg" alt="Recuerdo con flores blancas">
+    <!-- He simplificado el HTML para quitar el círculo, las fotos rectangulares se ven más profesionales en este diseño -->
+    <div class="photo-card">
+      <img src="foto1.jpg" alt="Recuerdo especial 1">
     </div>
     <div class="photo-card">
-      <img src="foto2.jpg" alt="Sonriendo en el campo de girasoles">
+      <img src="foto2.jpg" alt="Recuerdo especial 2">
     </div>
     <div class="photo-card">
-      <img src="foto3.jpg" alt="Caminando entre las flores amarillas">
+      <img src="foto3.jpg" alt="Recuerdo especial 3">
     </div>
     <div class="photo-card">
-      <img src="foto4.jpg" alt="Abrazando la naturaleza">
+      <img src="foto4.jpg" alt="Recuerdo especial 4">
     </div>
   </div>
 
   <script>
     function createFlowerRain() {
-      const symbols = ['🌻', '🌼', '✨', '💛', '🪸'];
-      for (let i = 0; i < 20; i++) {
+      // Flores más variadas y temáticas
+      const symbols = ['🌻', '🌼', '✨', '💛', '🪸', '🐚'];
+      for (let i = 0; i < 25; i++) { // Más flores
         setTimeout(() => {
           const flower = document.createElement('div');
           flower.classList.add('falling-flower');
           flower.innerText = symbols[Math.floor(Math.random() * symbols.length)];
           flower.style.left = Math.random() * 100 + 'vw';
-          flower.style.animationDuration = Math.random() * 3 + 2 + 's';
-          flower.style.fontSize = Math.random() * 15 + 20 + 'px';
+          flower.style.animationDuration = Math.random() * 3 + 2.5 + 's'; // Variación de velocidad
+          flower.style.fontSize = Math.random() * 15 + 22 + 'px'; // Variación de tamaño
           document.body.appendChild(flower);
 
-          setTimeout(() => { flower.remove(); }, 5000);
-        }, i * 120);
+          setTimeout(() => { flower.remove(); }, 5500);
+        }, i * 110); // Más rápido
       }
     }
   </script>
