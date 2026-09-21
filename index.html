@@ -22,7 +22,6 @@
       padding: 40px 20px;
       overflow-x: hidden;
       position: relative;
-      /* Fondo principal con la foto2.jpg */
       background-image: url('foto2.jpg');
       background-size: cover;
       background-position: center;
@@ -30,7 +29,6 @@
       background-attachment: fixed;
     }
 
-    /* Capa de oscurecimiento sobre la foto de fondo para mejorar la lectura */
     body::before {
       content: "";
       position: absolute;
@@ -42,7 +40,6 @@
       z-index: 1;
     }
 
-    /* Elementos flotantes decorativos de fondo */
     .bg-element {
       position: absolute;
       user-select: none;
@@ -57,7 +54,6 @@
       100% { transform: translateY(-12px) rotate(10deg); }
     }
 
-    /* Contenedor Superior (Tarjeta + Personajes posicionados a los lados) */
     .hero-wrapper {
       position: relative;
       display: flex;
@@ -70,14 +66,14 @@
     }
 
     .main-card {
-      background: rgba(23, 37, 65, 0.8);
+      background: rgba(23, 37, 65, 0.85);
       backdrop-filter: blur(8px);
-      border: 2px solid rgba(250, 204, 21, 0.4);
+      border: 3px solid rgba(250, 204, 21, 0.6);
       border-radius: 20px;
       padding: 35px 30px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 25px rgba(250, 204, 21, 0.3), 0 10px 30px rgba(0, 0, 0, 0.6);
       position: relative;
       z-index: 3;
     }
@@ -86,6 +82,7 @@
       color: #facc15;
       font-size: 1.8rem;
       margin-bottom: 15px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
 
     .main-card p {
@@ -114,15 +111,17 @@
       box-shadow: 0 6px 20px rgba(250, 204, 21, 0.6);
     }
 
-    /* Personajes posicionados flotando fuera de la tarjeta */
+    /* Ajuste de personajes y mezcla de color para disimular fondo blanco */
     .character {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       height: auto;
       z-index: 5;
-      filter: drop-shadow(0 8px 12px rgba(0,0,0,0.5));
       pointer-events: none;
+      /* Oculta/mezcla fondos claros o blancos */
+      mix-blend-mode: multiply;
+      filter: contrast(110%) brightness(105%);
     }
 
     .bob {
@@ -135,7 +134,7 @@
       right: -90px;
     }
 
-    /* Burbujas flotantes por toda la pantalla */
+    /* Burbujas flotantes con marco degradado y efecto Neón */
     .photo-gallery {
       position: fixed;
       top: 0;
@@ -151,11 +150,14 @@
       border-radius: 50%;
       overflow: hidden;
       pointer-events: auto;
-      border: 4px solid rgba(255, 255, 255, 0.8);
+      /* Marco brillante de doble borde */
+      border: 4px solid #ffffff;
+      outline: 3px solid rgba(250, 204, 21, 0.8);
       box-shadow: 
-        0 0 20px rgba(100, 200, 255, 0.6),
-        inset 0 0 20px rgba(255, 255, 255, 0.4);
-      transition: transform 0.3s ease;
+        0 0 20px rgba(250, 204, 21, 0.5),
+        0 0 35px rgba(100, 200, 255, 0.6),
+        inset 0 0 15px rgba(255, 255, 255, 0.6);
+      transition: all 0.3s ease;
       animation: floatAround linear infinite alternate;
     }
 
@@ -190,9 +192,11 @@
     .bubble:hover {
       transform: scale(1.15);
       z-index: 10;
+      outline-color: #facc15;
       box-shadow: 
-        0 0 30px rgba(100, 200, 255, 0.9), 
-        inset 0 0 30px rgba(255, 255, 255, 0.6);
+        0 0 30px rgba(250, 204, 21, 0.9), 
+        0 0 50px rgba(100, 200, 255, 0.8),
+        inset 0 0 25px rgba(255, 255, 255, 0.8);
     }
 
     .bubble img {
@@ -213,16 +217,16 @@
     .bubble::after {
       content: "";
       position: absolute;
-      top: 15%;
-      left: 15%;
-      width: 30%;
-      height: 30%;
-      background: rgba(255, 255, 255, 0.6);
+      top: 12%;
+      left: 12%;
+      width: 28%;
+      height: 28%;
+      background: rgba(255, 255, 255, 0.7);
       border-radius: 50%;
-      filter: blur(4px);
+      filter: blur(3px);
+      pointer-events: none;
     }
 
-    /* Animación de lluvia de flores */
     .falling-flower {
       position: fixed;
       top: -20px;
@@ -237,7 +241,6 @@
       to { transform: translateY(105vh) rotate(360deg); }
     }
 
-    /* Adaptación para dispositivos móviles */
     @media (max-width: 768px) {
       .hero-wrapper {
         max-width: 82%;
@@ -270,7 +273,7 @@
     <!-- Bob Esponja a la izquierda -->
     <img class="character bob" src="bobEsponja.png" alt="Bob Esponja con Uculele">
 
-    <!-- Tarjeta Principal -->
+    <!-- Tarjeta Principal con marco brillante -->
     <div class="main-card">
       <h2>¡Para Ti, Arenita! 🌻</h2>
       <p>
@@ -283,7 +286,7 @@
     <img class="character sandy" src="arenita.png" alt="Arenita Mejilla">
   </div>
 
-  <!-- Burbujas Flotantes -->
+  <!-- Burbujas Flotantes con Marcos -->
   <div class="photo-gallery">
     <div class="bubble size-lg">
       <img src="foto1.jpg" alt="Foto 1">
