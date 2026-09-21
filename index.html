@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>¡Para Ti, Arenita! 🌻</title>
   <style>
-    :root {
-      --amarillo-girasol: #ffcc00;
-      --dorado-calido: #ffa500;
-      --fondo-suave: #fffdf0;
-      --texto-oscuro: #2c2c2c;
-    }
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -19,233 +12,318 @@
     }
 
     body {
+      min-height: 100vh;
+      color: #ffffff;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--fondo-suave);
-      color: var(--texto-oscuro);
-      overflow-x: hidden;
-      min-height: 100vh;
-    }
-
-    /* --- PORTADA CON FOTO DE FONDO (foto2.jpg) --- */
-    .hero-header {
-      position: relative;
-      min-height: 100vh;
-      background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55)), 
-                  url('foto2.jpg') center/cover no-repeat;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      text-align: center;
-      color: white;
-      padding: 20px;
+      justify-content: flex-start;
+      padding: 40px 20px;
+      overflow-x: hidden;
+      position: relative;
+      /* Configuración del fondo con la foto2.jpg */
+      background-image: url('foto2.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
     }
 
-    .hero-card {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      padding: 35px 25px;
-      border-radius: 24px;
-      max-width: 650px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-      animation: fadeIn 1.2s ease-out;
+    /* Superposición para mejorar la legibilidad del texto */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4); /* Capa oscura semitransparente */
+      z-index: 1;
+    }
+
+    /* Fondo de flores y corazones flotantes */
+    .bg-element {
+      position: absolute;
+      user-select: none;
+      pointer-events: none;
+      opacity: 0.8;
+      animation: float 4s ease-in-out infinite alternate;
       z-index: 2;
     }
 
-    .personajes-header {
+    @keyframes float {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-12px) rotate(10deg); }
+    }
+
+    /* Contenedor Superior (Tarjeta + Bob + Arenita) */
+    .hero-wrapper {
+      position: relative;
       display: flex;
-      justify-content: center;
       align-items: center;
-      gap: 15px;
+      justify-content: center;
+      width: 100%;
+      max-width: 900px;
+      margin-top: 20px;
+      margin-bottom: 50px;
+      z-index: 3;
+    }
+
+    .character {
+      width: 180px;
+      height: auto;
+      z-index: 5;
+      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+    }
+
+    .bob {
+      margin-right: -40px;
+    }
+
+    .sandy {
+      margin-left: -40px;
+    }
+
+    .main-card {
+      background: rgba(23, 37, 65, 0.7); /* Más transparente */
+      backdrop-filter: blur(8px);
+      border: 2px solid rgba(250, 204, 21, 0.3);
+      border-radius: 20px;
+      padding: 30px 40px;
+      max-width: 450px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      z-index: 3;
+    }
+
+    .main-card h2 {
+      color: #facc15;
+      font-size: 1.8rem;
       margin-bottom: 15px;
     }
 
-    .personajes-header img {
-      width: 55px;
-      height: 55px;
-      object-fit: contain;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
-    }
-
-    .hero-card h1 {
-      font-size: 2.4rem;
-      color: var(--amarillo-girasol);
-      margin-bottom: 15px;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
-    }
-
-    .hero-card p {
-      font-size: 1.15rem;
-      line-height: 1.5;
+    .main-card p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #cbd5e1;
       margin-bottom: 25px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
     }
 
-    .btn-flores {
-      display: inline-block;
-      background: linear-gradient(135deg, #ffcc00, #ffa500);
-      color: #000;
-      font-weight: bold;
-      font-size: 1.05rem;
-      text-decoration: none;
-      padding: 14px 28px;
-      border-radius: 50px;
+    .btn {
+      background-color: #facc15;
+      color: #0f172a;
       border: none;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      border-radius: 25px;
       cursor: pointer;
-      box-shadow: 0 6px 20px rgba(255, 204, 0, 0.4);
       transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(250, 204, 21, 0.4);
     }
 
-    .btn-flores:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 10px 25px rgba(255, 204, 0, 0.6);
+    .btn:hover {
+      background-color: #fef08a;
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(250, 204, 21, 0.6);
     }
 
-    .btn-flores:active {
-      transform: scale(0.95);
-    }
-
-    /* --- ANIMACIÓN DE LLUVIAS --- */
-    .elemento-lluvia {
+    /* Galería de Fotos (Burbujas en movimiento por la pantalla) */
+    .photo-gallery {
       position: fixed;
-      top: -120px;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       pointer-events: none;
-      z-index: 9999;
-      user-select: none;
-      animation: caer linear forwards;
+      z-index: 4;
     }
 
-    .elemento-lluvia.imagen {
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      overflow: hidden;
+      pointer-events: auto;
+      border: 4px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 
+        0 0 20px rgba(100, 200, 255, 0.6),
+        inset 0 0 20px rgba(255, 255, 255, 0.4);
+      transition: transform 0.3s ease;
+      animation: floatAround linear infinite alternate;
+    }
+
+    /* Diferentes tamaños */
+    .bubble.size-sm { width: 120px; height: 120px; }
+    .bubble.size-md { width: 170px; height: 170px; }
+    .bubble.size-lg { width: 220px; height: 220px; }
+    .bubble.size-xl { width: 260px; height: 260px; }
+
+    /* Posiciones y trayectorias de movimiento variadas */
+    .bubble:nth-child(1) {
+      top: 10%; left: 5%;
+      animation-duration: 14s;
+    }
+    .bubble:nth-child(2) {
+      top: 60%; left: 12%;
+      animation-duration: 18s;
+      animation-direction: alternate-reverse;
+    }
+    .bubble:nth-child(3) {
+      top: 20%; right: 8%;
+      animation-duration: 16s;
+    }
+    .bubble:nth-child(4) {
+      top: 65%; right: 15%;
+      animation-duration: 20s;
+      animation-direction: alternate-reverse;
+    }
+    .bubble:nth-child(5) {
+      top: 40%; left: 45%;
+      animation-duration: 12s;
+    }
+
+    .bubble:hover {
+      transform: scale(1.15);
+      z-index: 10;
+      box-shadow: 
+        0 0 30px rgba(100, 200, 255, 0.9), 
+        inset 0 0 30px rgba(255, 255, 255, 0.6);
+    }
+
+    .bubble img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+      display: block;
     }
 
-    /* FORMA 1: MARCO DE CORAZÓN */
-    .forma-corazon {
-      clip-path: path('M 50 15 C 35 -10, -5 20, 50 90 C 105 20, 65 -10, 50 15 Z');
-    }
-
-    /* FORMA 2: MARCO DE GIRASOL (FLOR) */
-    .forma-girasol {
-      clip-path: polygon(
-        50% 0%, 61% 11%, 75% 2%, 81% 16%, 96% 12%, 96% 28%, 100% 40%, 93% 52%, 
-        100% 65%, 90% 74%, 93% 90%, 77% 91%, 70% 100%, 55% 93%, 43% 100%, 
-        30% 92%, 18% 97%, 13% 82%, 0% 77%, 5% 62%, 0% 48%, 10% 38%, 4% 22%, 
-        20% 18%, 24% 3%, 40% 9%
-      );
-    }
-
-    @keyframes caer {
+    @keyframes floatAround {
       0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
+        transform: translate(0, 0) rotate(0deg);
       }
-      80% {
-        opacity: 0.9;
+      25% {
+        transform: translate(60px, -80px) rotate(5deg);
+      }
+      50% {
+        transform: translate(-50px, 60px) rotate(-5deg);
+      }
+      75% {
+        transform: translate(80px, 40px) rotate(3deg);
       }
       100% {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0;
+        transform: translate(-70px, -60px) rotate(-3deg);
       }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Brillo de burbuja (efecto visual) */
+    .bubble::after {
+      content: "";
+      position: absolute;
+      top: 15%;
+      left: 15%;
+      width: 30%;
+      height: 30%;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      filter: blur(4px);
     }
 
-    @media (max-width: 600px) {
-      .hero-card h1 { font-size: 1.8rem; }
-      .hero-card p { font-size: 1rem; }
+    /* Animación de Flores cayendo al hacer clic */
+    .falling-flower {
+      position: fixed;
+      top: -20px;
+      font-size: 24px;
+      user-select: none;
+      pointer-events: none;
+      z-index: 100;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(105vh) rotate(360deg);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-wrapper {
+        flex-direction: column;
+      }
+      .bob, .sandy {
+        margin: 0;
+        width: 130px;
+      }
+      .bubble.size-sm { width: 90px; height: 90px; }
+      .bubble.size-md { width: 120px; height: 120px; }
+      .bubble.size-lg { width: 150px; height: 150px; }
+      .bubble.size-xl { width: 180px; height: 180px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- PORTADA CON FOTO2.JPG DE FONDO -->
-  <header class="hero-header">
-    <div class="hero-card">
-      <div class="personajes-header">
-        <!-- Bob Esponja -->
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/SpongeBob_SquarePants_character.svg" alt="Bob Esponja">
-        <span>🌻</span>
-        <!-- Arenita -->
-        <img src="https://upload.wikimedia.org/wikipedia/en/a/a0/Sandy_Cheeks.svg" alt="Arenita">
-      </div>
-      
-      <h1>¡Para Ti, Arenita! 🌻</h1>
-      <p>Un girasol digital y una aventura submarina para iluminar tu día.<br>
-      Tu sonrisa brilla con la misma fuerza que el sol de Fondo de Bikini. ¡Gracias por existir!</p>
-      
-      <button class="btn-flores" id="btnLluvia">¡Ver las Flores de Fondo de Bikini! 🌼</button>
+  <!-- Flores y Corazones Decorativos de Fondo -->
+  <div class="bg-element" style="top: 8%; left: 10%; font-size: 2rem;">💛</div>
+  <div class="bg-element" style="top: 12%; left: 22%; font-size: 1.8rem;">🌻</div>
+  <div class="bg-element" style="top: 6%; right: 15%; font-size: 2rem;">💛</div>
+  <div class="bg-element" style="top: 15%; right: 25%; font-size: 1.8rem;">🌻</div>
+
+  <!-- Sección Principal -->
+  <div class="hero-wrapper">
+    <!-- Ilustración Bob Esponja -->
+    <img class="character bob" src="https://upload.wikimedia.org/wikipedia/en/3/3b/SpongeBob_SquarePants_character.svg" alt="Bob Esponja">
+
+    <!-- Tarjeta Central -->
+    <div class="main-card">
+      <h2>¡Para Ti, Arenita! 🌻</h2>
+      <p>
+        Un girasol digital y una aventura submarina para iluminar tu día. Tu sonrisa brilla con la misma fuerza que el sol de Fondo de Bikini. ¡Gracias por existir!
+      </p>
+      <button class="btn" onclick="createFlowerRain()">¡Enviar más Flores de Fondo de Bikini! 🌼</button>
     </div>
-  </header>
 
-  <!-- JAVASCRIPT PARA HACER LLOVER ELEMENTOS E IMÁGENES CON MARCOS ESPECIALES -->
+    <!-- Ilustración Arenita -->
+    <img class="character sandy" src="https://upload.wikimedia.org/wikipedia/en/a/a0/Sandy_Cheeks.svg" alt="Arenita">
+  </div>
+
+  <!-- Galería de Fotografías (Burbujas de diferentes tamaños flotando por toda la pantalla) -->
+  <div class="photo-gallery">
+    <div class="bubble size-lg">
+      <img src="foto1.jpg" alt="Recuerdo con flores blancas">
+    </div>
+    <div class="bubble size-xl">
+      <img src="foto3.jpg" alt="Caminando entre las flores amarillas">
+    </div>
+    <div class="bubble size-md">
+      <img src="foto4.jpg" alt="Abrazando la naturaleza">
+    </div>
+    <div class="bubble size-sm">
+      <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/SpongeBob_SquarePants_character.svg" alt="Bob Esponja">
+    </div>
+    <div class="bubble size-md">
+      <img src="https://upload.wikimedia.org/wikipedia/en/a/a0/Sandy_Cheeks.svg" alt="Arenita Mechones">
+    </div>
+  </div>
+
   <script>
-    const btnLluvia = document.getElementById('btnLluvia');
-    
-    // Lista de elementos que van a llover
-    const simbolos = ['🌻', '🌼', '💛', '✨', '🌸', '💖'];
-    const imagenes = ['foto1.jpg', 'foto3.jpg', 'foto4.jpg'];
-
-    btnLluvia.addEventListener('click', () => {
-      // Lanzar una ráfaga de 35 elementos
-      for (let i = 0; i < 35; i++) {
+    function createFlowerRain() {
+      const symbols = ['🌻', '🌼', '✨', '💛', '🪸'];
+      for (let i = 0; i < 20; i++) {
         setTimeout(() => {
-          crearElementoLluvia();
+          const flower = document.createElement('div');
+          flower.classList.add('falling-flower');
+          flower.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+          flower.style.left = Math.random() * 100 + 'vw';
+          flower.style.animationDuration = Math.random() * 3 + 2 + 's';
+          flower.style.fontSize = Math.random() * 15 + 20 + 'px';
+          document.body.appendChild(flower);
+
+          setTimeout(() => { flower.remove(); }, 5000);
         }, i * 120);
       }
-    });
-
-    function crearElementoLluvia() {
-      const esImagen = Math.random() < 0.45; // 45% de probabilidad de ser una foto
-      const el = esImagen ? document.createElement('img') : document.createElement('div');
-
-      el.classList.add('elemento-lluvia');
-
-      if (esImagen) {
-        el.classList.add('imagen');
-        
-        // Asignar aleatoriamente la forma de corazón o girasol
-        if (Math.random() < 0.5) {
-          el.classList.add('forma-corazon');
-        } else {
-          el.classList.add('forma-girasol');
-        }
-
-        // Elige una imagen aleatoria
-        const imgAleatoria = imagenes[Math.floor(Math.random() * imagenes.length)];
-        el.src = imgAleatoria;
-        
-        // Tamaños para las fotos en la lluvia
-        const tamano = Math.random() * 50 + 70; // entre 70px y 120px
-        el.style.width = `${tamano}px`;
-        el.style.height = `${tamano}px`;
-      } else {
-        // Elige un símbolo aleatorio
-        el.innerText = simbolos[Math.floor(Math.random() * simbolos.length)];
-        const tamanoTexto = Math.random() * 25 + 20;
-        el.style.fontSize = `${tamanoTexto}px`;
-      }
-
-      // Posición horizontal aleatoria
-      const posX = Math.random() * (window.innerWidth - 80);
-      el.style.left = `${posX}px`;
-
-      // Tiempo de caída aleatorio
-      const duracion = Math.random() * 3 + 3;
-      el.style.animationDuration = `${duracion}s`;
-
-      document.body.appendChild(el);
-
-      // Eliminar el elemento del DOM al finalizar
-      setTimeout(() => {
-        el.remove();
-      }, duracion * 1000);
     }
   </script>
-
 </body>
 </html>
