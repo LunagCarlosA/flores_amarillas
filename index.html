@@ -13,12 +13,10 @@
 
     body {
       min-height: 100vh;
-      /* --- NUEVO: FONDO CON TU FOTO --- */
-      background-image: url('foto2.jpg'); /* Usamos tu foto de campo */
-      background-size: cover; /* Para que cubra toda la pantalla */
+      background-image: url('foto2.jpg');
+      background-size: cover;
       background-position: center center;
-      background-attachment: fixed; /* Mantiene el fondo fijo al hacer scroll */
-      /* -------------------------------- */
+      background-attachment: fixed;
       color: #ffffff;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
@@ -30,14 +28,14 @@
       position: relative;
     }
 
-    /* Fondo animado sutil de flores y corazones */
+    /* Fondo animado de flores */
     .bg-element {
       position: absolute;
       user-select: none;
       pointer-events: none;
-      opacity: 0.9; /* Un poco más visible sobre la foto */
+      opacity: 0.9;
       animation: float 4s ease-in-out infinite alternate;
-      z-index: 1; /* Detrás de todo */
+      z-index: 1;
     }
 
     @keyframes float {
@@ -45,7 +43,7 @@
       100% { transform: translateY(-12px) rotate(10deg); }
     }
 
-    /* Contenedor Superior (Tarjeta + Bob + Arenita) */
+    /* Hero Wrapper (Bob + Arenita + Tarjeta) */
     .hero-wrapper {
       position: relative;
       display: flex;
@@ -54,30 +52,24 @@
       width: 100%;
       max-width: 900px;
       margin-top: 20px;
-      margin-bottom: 50px;
+      margin-bottom: 40px;
       z-index: 10;
     }
 
     .character {
-      width: 180px;
+      width: 170px;
       height: auto;
       z-index: 5;
       filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
     }
 
-    .bob {
-      margin-right: -40px;
-    }
+    .bob { margin-right: -40px; }
+    .sandy { margin-left: -40px; }
 
-    .sandy {
-      margin-left: -40px;
-    }
-
-    /* Tarjeta Central: Retocada para que resalte sobre la foto de fondo */
     .main-card {
-      background: rgba(17, 24, 39, 0.88); /* Más oscuro y opaco */
+      background: rgba(17, 24, 39, 0.88);
       backdrop-filter: blur(12px);
-      border: 2px solid rgba(250, 204, 21, 0.5); /* Borde amarillo más visible */
+      border: 2px solid rgba(250, 204, 21, 0.5);
       border-radius: 20px;
       padding: 30px 40px;
       max-width: 450px;
@@ -120,47 +112,89 @@
       box-shadow: 0 6px 20px rgba(250, 204, 21, 0.7);
     }
 
-    /* Galería de Fotos Abajo: Animación y Bordes */
-    .photo-gallery {
+    /* --- DISEÑO DE GIRASOL CON FOTOS Y MARCO DE FLORES --- */
+    .flower-gallery-container {
+      position: relative;
+      width: 380px;
+      height: 380px;
+      margin: 20px auto 50px;
       display: flex;
-      justify-content: center;
       align-items: center;
-      gap: 25px;
-      flex-wrap: wrap;
-      width: 100%;
-      max-width: 1100px;
+      justify-content: center;
       z-index: 10;
-      margin-bottom: 30px;
     }
 
-    .photo-card {
-      background: rgba(17, 24, 39, 0.7); /* Fondo de tarjeta sutil */
-      backdrop-filter: blur(5px);
-      padding: 10px;
-      border-radius: 18px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-      transition: all 0.3s ease;
-      width: 220px;
-      border: 2px solid rgba(250, 204, 21, 0.2); /* Borde sutil */
+    /* Foto Centro del Girasol */
+    .sunflower-center {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      padding: 6px;
+      background: linear-gradient(135deg, #facc15, #ca8a04);
+      box-shadow: 0 0 25px rgba(250, 204, 21, 0.8);
+      z-index: 6;
+      transition: transform 0.4s ease;
+      cursor: pointer;
     }
 
-    /* --- NUEVO: FOTOS MÁS ANIMADAS --- */
-    .photo-card:hover {
-      transform: translateY(-12px) scale(1.05) rotate(1deg); /* Más movimiento */
-      border: 2px solid rgba(250, 204, 21, 0.8); /* Resalta el borde */
-      box-shadow: 0 15px 35px rgba(250, 204, 21, 0.4);
+    .sunflower-center:hover {
+      transform: scale(1.1);
     }
-    /* ---------------------------------- */
 
-    .photo-card img {
+    .sunflower-center img {
       width: 100%;
-      height: 260px;
+      height: 100%;
       object-fit: cover;
-      border-radius: 12px;
-      display: block;
+      border-radius: 50%;
+      border: 3px solid #78350f;
     }
 
-    /* Lluvia de Flores interactiva (más intensa) */
+    /* Pétalos (Fotos alrededor) */
+    .sunflower-petal {
+      position: absolute;
+      width: 100px;
+      height: 130px;
+      padding: 5px;
+      background: linear-gradient(180deg, #facc15 0%, #eab308 100%);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+      transition: all 0.4s ease;
+      z-index: 4;
+      cursor: pointer;
+    }
+
+    .sunflower-petal img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 40% 40% 35% 35%;
+      border: 2px solid #78350f;
+    }
+
+    /* Posicionamiento en Forma de Girasol */
+    .petal-1 { transform: translateY(-130px) rotate(0deg); }
+    .petal-2 { transform: translateX(130px) rotate(90deg); }
+    .petal-3 { transform: translateY(130px) rotate(180deg); }
+    .petal-4 { transform: translateX(-130px) rotate(270deg); }
+
+    /* Corrección de rotación de la foto dentro del pétalo para que queden derechas */
+    .petal-1 img { transform: rotate(0deg); }
+    .petal-2 img { transform: rotate(-90deg); }
+    .petal-3 img { transform: rotate(-180deg); }
+    .petal-4 img { transform: rotate(-270deg); }
+
+    .sunflower-petal:hover {
+      z-index: 8;
+      box-shadow: 0 0 25px rgba(250, 204, 21, 0.9);
+    }
+
+    .petal-1:hover { transform: translateY(-145px) scale(1.15) rotate(0deg); }
+    .petal-2:hover { transform: translateX(145px) scale(1.15) rotate(90deg); }
+    .petal-3:hover { transform: translateY(145px) scale(1.15) rotate(180deg); }
+    .petal-4:hover { transform: translateX(-145px) scale(1.15) rotate(270deg); }
+
+    /* Lluvia de Flores */
     .falling-flower {
       position: fixed;
       top: -20px;
@@ -177,42 +211,44 @@
       }
     }
 
-    /* Soporte para móviles */
-    @media (max-width: 768px) {
-      .hero-wrapper {
-        flex-direction: column;
+    @media (max-width: 600px) {
+      .flower-gallery-container {
+        width: 300px;
+        height: 300px;
+        margin-top: 10px;
       }
-      .bob, .sandy {
-        margin: 0;
-        width: 140px;
+      .sunflower-center {
+        width: 110px;
+        height: 110px;
       }
-      .main-card {
-        max-width: 90%;
-        padding: 20px;
+      .sunflower-petal {
+        width: 80px;
+        height: 105px;
       }
-      .photo-gallery {
-        gap: 15px;
-      }
-      .photo-card {
-        width: 45%;
-      }
+      .petal-1 { transform: translateY(-105px) rotate(0deg); }
+      .petal-2 { transform: translateX(105px) rotate(90deg); }
+      .petal-3 { transform: translateY(105px) rotate(180deg); }
+      .petal-4 { transform: translateX(-105px) rotate(270deg); }
+      
+      .petal-1:hover { transform: translateY(-115px) scale(1.1) rotate(0deg); }
+      .petal-2:hover { transform: translateX(115px) scale(1.1) rotate(90deg); }
+      .petal-3:hover { transform: translateY(115px) scale(1.1) rotate(180deg); }
+      .petal-4:hover { transform: translateX(-115px) scale(1.1) rotate(270deg); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Flores y Corazones Decorativos de Fondo -->
+  <!-- Elementos Flotantes Decorativos -->
   <div class="bg-element" style="top: 8%; left: 10%; font-size: 2.2rem;">💛</div>
   <div class="bg-element" style="top: 15%; left: 25%; font-size: 2rem;">🌻</div>
   <div class="bg-element" style="top: 6%; right: 15%; font-size: 2.2rem;">💛</div>
   <div class="bg-element" style="top: 18%; right: 30%; font-size: 2rem;">🌻</div>
 
-  <!-- Sección Principal con Bob, Arenita y Tarjeta -->
+  <!-- Sección Hero (Bob + Arenita + Tarjeta) -->
   <div class="hero-wrapper">
-    <!-- Bob Esponja: Usamos imagen directo de su wiki oficial para asegurar carga -->
     <img class="character bob" src="https://assets.nick.com/uri/mgid:arc:imageassetref:shared.nick.com:a60d6258-8422-4217-a065-2766028a381a?quality=0.7&gen=nt&width=400&height=400&crop=true" alt="Bob Esponja">
 
-    <!-- Tarjeta Central -->
     <div class="main-card">
       <h2>¡Para Ti, Arenita! 🌻</h2>
       <p>
@@ -221,43 +257,46 @@
       <button class="btn" onclick="createFlowerRain()">¡Enviar más Flores de Fondo de Bikini! 🌼</button>
     </div>
 
-    <!-- Arenita: Usamos imagen directo de su wiki oficial -->
     <img class="character sandy" src="https://assets.nick.com/uri/mgid:arc:imageassetref:shared.nick.com:c791d211-1376-47a3-b0e6-591781297d21?quality=0.7&gen=nt&width=400&height=400&crop=true" alt="Arenita">
   </div>
 
-  <!-- Galería de Fotografías con Efectos Animados -->
-  <div class="photo-gallery">
-    <!-- He simplificado el HTML para quitar el círculo, las fotos rectangulares se ven más profesionales en este diseño -->
-    <div class="photo-card">
-      <img src="foto1.jpg" alt="Recuerdo especial 1">
+  <!-- GIRASOL INTERACTIVO DE FOTOS -->
+  <div class="flower-gallery-container">
+    <!-- Centro del Girasol (Foto en pareja) -->
+    <div class="sunflower-center" title="¡Nosotros!">
+      <img src="foto1.jpg" alt="Foto Juntos">
     </div>
-    <div class="photo-card">
-      <img src="foto2.jpg" alt="Recuerdo especial 2">
+
+    <!-- Pétalos (Fotos de ella) -->
+    <div class="sunflower-petal petal-1">
+      <img src="foto2.jpg" alt="Pétalo 1">
     </div>
-    <div class="photo-card">
-      <img src="foto3.jpg" alt="Recuerdo especial 3">
+    <div class="sunflower-petal petal-2">
+      <img src="foto3.jpg" alt="Pétalo 2">
     </div>
-    <div class="photo-card">
-      <img src="foto4.jpg" alt="Recuerdo especial 4">
+    <div class="sunflower-petal petal-3">
+      <img src="foto4.jpg" alt="Pétalo 3">
+    </div>
+    <div class="sunflower-petal petal-4">
+      <img src="foto2.jpg" alt="Pétalo 4">
     </div>
   </div>
 
   <script>
     function createFlowerRain() {
-      // Flores más variadas y temáticas
       const symbols = ['🌻', '🌼', '✨', '💛', '🪸', '🐚'];
-      for (let i = 0; i < 25; i++) { // Más flores
+      for (let i = 0; i < 25; i++) {
         setTimeout(() => {
           const flower = document.createElement('div');
           flower.classList.add('falling-flower');
           flower.innerText = symbols[Math.floor(Math.random() * symbols.length)];
           flower.style.left = Math.random() * 100 + 'vw';
-          flower.style.animationDuration = Math.random() * 3 + 2.5 + 's'; // Variación de velocidad
-          flower.style.fontSize = Math.random() * 15 + 22 + 'px'; // Variación de tamaño
+          flower.style.animationDuration = Math.random() * 3 + 2.5 + 's';
+          flower.style.fontSize = Math.random() * 15 + 22 + 'px';
           document.body.appendChild(flower);
 
           setTimeout(() => { flower.remove(); }, 5500);
-        }, i * 110); // Más rápido
+        }, i * 110);
       }
     }
   </script>
