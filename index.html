@@ -1,304 +1,150 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>¡Para Ti, Arenita! 🌻</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¡Para Ti, Arenita! 🌻</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #fff9db; /* Amarillo pálido de fondo */
+    color: #333;
+  }
 
-    body {
-      min-height: 100vh;
-      background-image: url('foto2.jpg');
-      background-size: cover;
-      background-position: center center;
-      background-attachment: fixed;
-      color: #ffffff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 40px 20px;
-      overflow-x: hidden;
-      position: relative;
-    }
+  /* --- Sección de Portada (Fondo) --- */
+  .portada {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Ocupa todo el alto de la pantalla */
+    background-image: url('image_0.png'); /* TU FOTO DE FONDO */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
 
-    /* Fondo animado de flores */
-    .bg-element {
-      position: absolute;
-      user-select: none;
-      pointer-events: none;
-      opacity: 0.9;
-      animation: float 4s ease-in-out infinite alternate;
-      z-index: 1;
-    }
+  .cabecera {
+    background: rgba(0,0,0,0.6);
+    padding: 20px 40px;
+    border-radius: 15px;
+    text-align: center;
+  }
 
-    @keyframes float {
-      0% { transform: translateY(0px) rotate(0deg); }
-      100% { transform: translateY(-12px) rotate(10deg); }
-    }
+  h2 {
+    color: #ffd700; /* Dorado para el nombre */
+    margin-top: 0;
+  }
 
-    /* Hero Wrapper (Bob + Arenita + Tarjeta) */
-    .hero-wrapper {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      max-width: 900px;
-      margin-top: 20px;
-      margin-bottom: 40px;
-      z-index: 10;
-    }
+  .boton {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #ffd700;
+    color: #333;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  }
 
-    .character {
-      width: 170px;
-      height: auto;
-      z-index: 5;
-      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-    }
+  /* --- Sección de Galería (Fotos Mejoradas) --- */
+  .galeria {
+    padding: 50px 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px; /* Espacio entre fotos */
+  }
 
-    .bob { margin-right: -40px; }
-    .sandy { margin-left: -40px; }
+  .foto-petalo {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    
+    /* Animación base */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-    .main-card {
-      background: rgba(17, 24, 39, 0.88);
-      backdrop-filter: blur(12px);
-      border: 2px solid rgba(250, 204, 21, 0.5);
-      border-radius: 20px;
-      padding: 30px 40px;
-      max-width: 450px;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-      z-index: 3;
-    }
+  /* Imagen dentro del pétalo */
+  .foto-petalo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la foto sin deformarla */
+  }
 
-    .main-card h2 {
-      color: #facc15;
-      font-size: 1.8rem;
-      margin-bottom: 15px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    }
+  /* --- Marco Floral (con pseudo-elemento) --- */
+  .foto-petalo::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 5px solid transparent;
+    border-radius: 50%;
+    /* Reemplaza con una URL de marco floral real si tienes una */
+    border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="10" r="10" fill="yellow" stroke="gold" stroke-width="2"/><circle cx="90" cy="50" r="10" fill="yellow" stroke="gold" stroke-width="2"/><circle cx="50" cy="90" r="10" fill="yellow" stroke="gold" stroke-width="2"/><circle cx="10" cy="50" r="10" fill="yellow" stroke="gold" stroke-width="2"/><circle cx="30" cy="30" r="8" fill="lightyellow" stroke="goldenrod" stroke-width="1.5"/><circle cx="70" cy="30" r="8" fill="lightyellow" stroke="goldenrod" stroke-width="1.5"/><circle cx="70" cy="70" r="8" fill="lightyellow" stroke="goldenrod" stroke-width="1.5"/><circle cx="30" cy="70" r="8" fill="lightyellow" stroke="goldenrod" stroke-width="1.5"/></svg>') 30;
+    pointer-events: none; /* No interfiere con el clic */
+  }
 
-    .main-card p {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #e2e8f0;
-      margin-bottom: 25px;
-    }
+  /* --- Animaciones al Tocar (Hover) --- */
+  .foto-petalo:hover {
+    transform: scale(1.1) rotate(5deg); /* Crece y gira un poco */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  }
 
-    .btn {
-      background-color: #facc15;
-      color: #0f172a;
-      border: none;
-      padding: 12px 24px;
-      font-size: 0.95rem;
-      font-weight: bold;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(250, 204, 21, 0.5);
-    }
+  /* --- Estilo Específico de las Fotos de Arena --- */
+  /* Puedes ajustar esto para cada foto si lo necesitas */
+  .foto-arena {
+    /* Por ejemplo, ajustar la posición si están cortadas */
+  }
 
-    .btn:hover {
-      background-color: #fef08a;
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(250, 204, 21, 0.7);
-    }
-
-    /* --- DISEÑO DE GIRASOL CON FOTOS Y MARCO DE FLORES --- */
-    .flower-gallery-container {
-      position: relative;
-      width: 380px;
-      height: 380px;
-      margin: 20px auto 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-    }
-
-    /* Foto Centro del Girasol */
-    .sunflower-center {
-      position: absolute;
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      padding: 6px;
-      background: linear-gradient(135deg, #facc15, #ca8a04);
-      box-shadow: 0 0 25px rgba(250, 204, 21, 0.8);
-      z-index: 6;
-      transition: transform 0.4s ease;
-      cursor: pointer;
-    }
-
-    .sunflower-center:hover {
-      transform: scale(1.1);
-    }
-
-    .sunflower-center img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 3px solid #78350f;
-    }
-
-    /* Pétalos (Fotos alrededor) */
-    .sunflower-petal {
-      position: absolute;
-      width: 100px;
-      height: 130px;
-      padding: 5px;
-      background: linear-gradient(180deg, #facc15 0%, #eab308 100%);
-      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.5);
-      transition: all 0.4s ease;
-      z-index: 4;
-      cursor: pointer;
-    }
-
-    .sunflower-petal img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 40% 40% 35% 35%;
-      border: 2px solid #78350f;
-    }
-
-    /* Posicionamiento en Forma de Girasol */
-    .petal-1 { transform: translateY(-130px) rotate(0deg); }
-    .petal-2 { transform: translateX(130px) rotate(90deg); }
-    .petal-3 { transform: translateY(130px) rotate(180deg); }
-    .petal-4 { transform: translateX(-130px) rotate(270deg); }
-
-    /* Corrección de rotación de la foto dentro del pétalo para que queden derechas */
-    .petal-1 img { transform: rotate(0deg); }
-    .petal-2 img { transform: rotate(-90deg); }
-    .petal-3 img { transform: rotate(-180deg); }
-    .petal-4 img { transform: rotate(-270deg); }
-
-    .sunflower-petal:hover {
-      z-index: 8;
-      box-shadow: 0 0 25px rgba(250, 204, 21, 0.9);
-    }
-
-    .petal-1:hover { transform: translateY(-145px) scale(1.15) rotate(0deg); }
-    .petal-2:hover { transform: translateX(145px) scale(1.15) rotate(90deg); }
-    .petal-3:hover { transform: translateY(145px) scale(1.15) rotate(180deg); }
-    .petal-4:hover { transform: translateX(-145px) scale(1.15) rotate(270deg); }
-
-    /* Lluvia de Flores */
-    .falling-flower {
-      position: fixed;
-      top: -20px;
-      font-size: 26px;
-      user-select: none;
-      pointer-events: none;
-      z-index: 100;
-      animation: fall linear forwards;
-    }
-
-    @keyframes fall {
-      to {
-        transform: translateY(105vh) rotate(360deg);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .flower-gallery-container {
-        width: 300px;
-        height: 300px;
-        margin-top: 10px;
-      }
-      .sunflower-center {
-        width: 110px;
-        height: 110px;
-      }
-      .sunflower-petal {
-        width: 80px;
-        height: 105px;
-      }
-      .petal-1 { transform: translateY(-105px) rotate(0deg); }
-      .petal-2 { transform: translateX(105px) rotate(90deg); }
-      .petal-3 { transform: translateY(105px) rotate(180deg); }
-      .petal-4 { transform: translateX(-105px) rotate(270deg); }
-      
-      .petal-1:hover { transform: translateY(-115px) scale(1.1) rotate(0deg); }
-      .petal-2:hover { transform: translateX(115px) scale(1.1) rotate(90deg); }
-      .petal-3:hover { transform: translateY(115px) scale(1.1) rotate(180deg); }
-      .petal-4:hover { transform: translateX(-115px) scale(1.1) rotate(270deg); }
-    }
-  </style>
+</style>
 </head>
 <body>
 
-  <!-- Elementos Flotantes Decorativos -->
-  <div class="bg-element" style="top: 8%; left: 10%; font-size: 2.2rem;">💛</div>
-  <div class="bg-element" style="top: 15%; left: 25%; font-size: 2rem;">🌻</div>
-  <div class="bg-element" style="top: 6%; right: 15%; font-size: 2.2rem;">💛</div>
-  <div class="bg-element" style="top: 18%; right: 30%; font-size: 2rem;">🌻</div>
-
-  <!-- Sección Hero (Bob + Arenita + Tarjeta) -->
-  <div class="hero-wrapper">
-    <img class="character bob" src="https://assets.nick.com/uri/mgid:arc:imageassetref:shared.nick.com:a60d6258-8422-4217-a065-2766028a381a?quality=0.7&gen=nt&width=400&height=400&crop=true" alt="Bob Esponja">
-
-    <div class="main-card">
+  <!-- Portada Principal -->
+  <div class="portada">
+    <div class="cabecera">
+      <p>💛 🌻 💛 🌻</p>
       <h2>¡Para Ti, Arenita! 🌻</h2>
-      <p>
-        Un girasol digital y una aventura submarina para iluminar tu día. Tu sonrisa brilla con la misma fuerza que el sol de Fondo de Bikini. ¡Gracias por existir!
-      </p>
-      <button class="btn" onclick="createFlowerRain()">¡Enviar más Flores de Fondo de Bikini! 🌼</button>
-    </div>
-
-    <img class="character sandy" src="https://assets.nick.com/uri/mgid:arc:imageassetref:shared.nick.com:c791d211-1376-47a3-b0e6-591781297d21?quality=0.7&gen=nt&width=400&height=400&crop=true" alt="Arenita">
-  </div>
-
-  <!-- GIRASOL INTERACTIVO DE FOTOS -->
-  <div class="flower-gallery-container">
-    <!-- Centro del Girasol (Foto en pareja) -->
-    <div class="sunflower-center" title="¡Nosotros!">
-      <img src="foto1.jpg" alt="Foto Juntos">
-    </div>
-
-    <!-- Pétalos (Fotos de ella) -->
-    <div class="sunflower-petal petal-1">
-      <img src="foto2.jpg" alt="Pétalo 1">
-    </div>
-    <div class="sunflower-petal petal-2">
-      <img src="foto3.jpg" alt="Pétalo 2">
-    </div>
-    <div class="sunflower-petal petal-3">
-      <img src="foto4.jpg" alt="Pétalo 3">
-    </div>
-    <div class="sunflower-petal petal-4">
-      <img src="foto2.jpg" alt="Pétalo 4">
+      <p>Un girasol digital y una aventura submarina para iluminar tu día.</p>
+      <p>Tu sonrisa brilla con la misma fuerza que el sol de Fondo de Bikini. ¡Gracias por existir!</p>
+      <a href="#" class="boton">¡Enviar más Flores de Fondo de Bikini! 🌼</a>
     </div>
   </div>
 
-  <script>
-    function createFlowerRain() {
-      const symbols = ['🌻', '🌼', '✨', '💛', '🪸', '🐚'];
-      for (let i = 0; i < 25; i++) {
-        setTimeout(() => {
-          const flower = document.createElement('div');
-          flower.classList.add('falling-flower');
-          flower.innerText = symbols[Math.floor(Math.random() * symbols.length)];
-          flower.style.left = Math.random() * 100 + 'vw';
-          flower.style.animationDuration = Math.random() * 3 + 2.5 + 's';
-          flower.style.fontSize = Math.random() * 15 + 22 + 'px';
-          document.body.appendChild(flower);
+  <!-- Galería de Fotos como Pétalos -->
+  <div class="galeria">
+    <!-- Foto Juntos -->
+    <div class="foto-petalo" onclick="console.log('Click en Foto Juntos')">
+      <img src="image_1.png" alt="Foto Juntos">
+    </div>
 
-          setTimeout(() => { flower.remove(); }, 5500);
-        }, i * 110);
-      }
-    }
-  </script>
+    <!-- Arenita 1 (Arenita de espaldas) -->
+    <div class="foto-petalo foto-arena" onclick="console.log('Click en Arenita 1')">
+      <img src="image_2.png" alt="Arenita De Espaldas">
+    </div>
+
+    <!-- Arenita 2 (Arenita sonriendo) -->
+    <div class="foto-petalo foto-arena" onclick="console.log('Click en Arenita 2')">
+      <img src="image_3.png" alt="Arenita Sonriendo">
+    </div>
+
+    <!-- Arenita 3 (Arenita perfil) -->
+    <div class="foto-petalo foto-arena" onclick="console.log('Click en Arenita 3')">
+      <img src="image_4.png" alt="Arenita De Perfil">
+    </div>
+  </div>
+
 </body>
 </html>
