@@ -106,10 +106,10 @@
       transform: scale(0.95);
     }
 
-    /* --- ANIMACIÓN DE LLUVIAS (LLUVIA DINÁMICA) --- */
+    /* --- ANIMACIÓN DE LLUVIAS --- */
     .elemento-lluvia {
       position: fixed;
-      top: -100px;
+      top: -120px;
       pointer-events: none;
       z-index: 9999;
       user-select: none;
@@ -117,10 +117,23 @@
     }
 
     .elemento-lluvia.imagen {
-      border-radius: 50%;
-      border: 3px solid var(--amarillo-girasol);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       object-fit: cover;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    }
+
+    /* FORMA 1: MARCO DE CORAZÓN */
+    .forma-corazon {
+      clip-path: path('M 50 15 C 35 -10, -5 20, 50 90 C 105 20, 65 -10, 50 15 Z');
+    }
+
+    /* FORMA 2: MARCO DE GIRASOL (FLOR) */
+    .forma-girasol {
+      clip-path: polygon(
+        50% 0%, 61% 11%, 75% 2%, 81% 16%, 96% 12%, 96% 28%, 100% 40%, 93% 52%, 
+        100% 65%, 90% 74%, 93% 90%, 77% 91%, 70% 100%, 55% 93%, 43% 100%, 
+        30% 92%, 18% 97%, 13% 82%, 0% 77%, 5% 62%, 0% 48%, 10% 38%, 4% 22%, 
+        20% 18%, 24% 3%, 40% 9%
+      );
     }
 
     @keyframes caer {
@@ -169,7 +182,7 @@
     </div>
   </header>
 
-  <!-- JAVASCRIPT PARA HACER LLOVER ELEMENTOS E IMÁGENES -->
+  <!-- JAVASCRIPT PARA HACER LLOVER ELEMENTOS E IMÁGENES CON MARCOS ESPECIALES -->
   <script>
     const btnLluvia = document.getElementById('btnLluvia');
     
@@ -182,44 +195,52 @@
       for (let i = 0; i < 35; i++) {
         setTimeout(() => {
           crearElementoLluvia();
-        }, i * 120); // Aparecen gradualmente
+        }, i * 120);
       }
     });
 
     function crearElementoLluvia() {
-      const esImagen = Math.random() < 0.4; // 40% de probabilidad de ser una foto
+      const esImagen = Math.random() < 0.45; // 45% de probabilidad de ser una foto
       const el = esImagen ? document.createElement('img') : document.createElement('div');
 
       el.classList.add('elemento-lluvia');
 
       if (esImagen) {
         el.classList.add('imagen');
-        // Elige una imagen aleatoria entre foto1.jpg, foto3.jpg y foto4.jpg
+        
+        // Asignar aleatoriamente la forma de corazón o girasol
+        if (Math.random() < 0.5) {
+          el.classList.add('forma-corazon');
+        } else {
+          el.classList.add('forma-girasol');
+        }
+
+        // Elige una imagen aleatoria
         const imgAleatoria = imagenes[Math.floor(Math.random() * imagenes.length)];
         el.src = imgAleatoria;
         
-        // Tamaños variados para las fotos en la lluvia
-        const tamano = Math.random() * 50 + 60; // entre 60px y 110px
+        // Tamaños para las fotos en la lluvia
+        const tamano = Math.random() * 50 + 70; // entre 70px y 120px
         el.style.width = `${tamano}px`;
         el.style.height = `${tamano}px`;
       } else {
-        // Elige un símbolo aleatorio (flores/corazones)
+        // Elige un símbolo aleatorio
         el.innerText = simbolos[Math.floor(Math.random() * simbolos.length)];
-        const tamanoTexto = Math.random() * 25 + 20; // entre 20px y 45px
+        const tamanoTexto = Math.random() * 25 + 20;
         el.style.fontSize = `${tamanoTexto}px`;
       }
 
-      // Posición horizontal aleatoria en la pantalla
+      // Posición horizontal aleatoria
       const posX = Math.random() * (window.innerWidth - 80);
       el.style.left = `${posX}px`;
 
       // Tiempo de caída aleatorio
-      const duracion = Math.random() * 3 + 3; // entre 3s y 6s
+      const duracion = Math.random() * 3 + 3;
       el.style.animationDuration = `${duracion}s`;
 
       document.body.appendChild(el);
 
-      // Eliminar el elemento del DOM al terminar la animación
+      // Eliminar el elemento del DOM al finalizar
       setTimeout(() => {
         el.remove();
       }, duracion * 1000);
