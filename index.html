@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>¡Para mi Arenita! 🌻</title>
+  <title>¡Para Ti, Arenita! 🌻</title>
   <style>
     * {
       box-sizing: border-box;
@@ -160,7 +160,7 @@
       right: -100px;
     }
 
-    /* Burbujas flotantes por la pantalla */
+    /* Galería de Burbujas Flotantes */
     .photo-gallery {
       position: fixed;
       top: 0;
@@ -182,40 +182,66 @@
         0 0 20px rgba(250, 204, 21, 0.5),
         0 0 35px rgba(100, 200, 255, 0.6),
         inset 0 0 15px rgba(255, 255, 255, 0.6);
-      transition: all 0.3s ease;
-      animation: floatAround linear infinite alternate;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: popAndFade ease-in-out infinite;
+      opacity: 0;
     }
 
+    /* Diferentes tamaños */
     .bubble.size-sm { width: 130px; height: 130px; }
     .bubble.size-md { width: 170px; height: 170px; }
     .bubble.size-lg { width: 220px; height: 220px; }
     .bubble.size-xl { width: 260px; height: 260px; }
 
+    /* Posiciones y tiempos desfasados para aparecer/desaparecer alternadamente */
     .bubble:nth-child(1) {
       top: 8%; left: 4%;
-      animation-duration: 14s;
+      animation-duration: 8s;
+      animation-delay: 0s;
     }
     .bubble:nth-child(2) {
       top: 55%; left: 8%;
-      animation-duration: 18s;
-      animation-direction: alternate-reverse;
+      animation-duration: 10s;
+      animation-delay: 2s;
     }
     .bubble:nth-child(3) {
       top: 15%; right: 5%;
-      animation-duration: 16s;
+      animation-duration: 9s;
+      animation-delay: 4s;
     }
     .bubble:nth-child(4) {
       top: 60%; right: 10%;
-      animation-duration: 20s;
-      animation-direction: alternate-reverse;
+      animation-duration: 11s;
+      animation-delay: 1.5s;
     }
     .bubble:nth-child(5) {
       top: 45%; left: 42%;
-      animation-duration: 13s;
+      animation-duration: 8.5s;
+      animation-delay: 5s;
+    }
+
+    /* Animación de aparecer (fade in), flotar levemente y desaparecer (fade out) */
+    @keyframes popAndFade {
+      0% {
+        opacity: 0;
+        transform: scale(0.3) translateY(20px);
+      }
+      20% {
+        opacity: 1;
+        transform: scale(1) translateY(0px);
+      }
+      75% {
+        opacity: 1;
+        transform: scale(1.05) translateY(-20px);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.4) translateY(-40px);
+      }
     }
 
     .bubble:hover {
-      transform: scale(1.15);
+      transform: scale(1.15) !important;
       z-index: 10;
       outline-color: #facc15;
       box-shadow: 
@@ -229,14 +255,6 @@
       height: 100%;
       object-fit: cover;
       display: block;
-    }
-
-    @keyframes floatAround {
-      0% { transform: translate(0, 0) rotate(0deg); }
-      25% { transform: translate(50px, -60px) rotate(4deg); }
-      50% { transform: translate(-40px, 50px) rotate(-4deg); }
-      75% { transform: translate(60px, 30px) rotate(2deg); }
-      100% { transform: translate(-50px, -40px) rotate(-2deg); }
     }
 
     .bubble::after {
@@ -317,7 +335,7 @@
     </div>
   </div>
 
-  <!-- Burbujas Flotantes con Marcos -->
+  <!-- Burbujas Flotantes con Marcos y Diferentes Tamaños -->
   <div class="photo-gallery">
     <div class="bubble size-lg">
       <img src="foto1.jpg" alt="Foto 1">
@@ -328,7 +346,7 @@
     <div class="bubble size-md">
       <img src="foto4.jpg" alt="Foto 4">
     </div>
-    <div class="bubble size-md">
+    <div class="bubble size-sm">
       <img src="burbujas.jpg" alt="Bob y Arenita en burbuja">
     </div>
     <div class="bubble size-lg">
