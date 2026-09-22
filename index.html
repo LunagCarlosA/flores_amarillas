@@ -54,7 +54,7 @@
       100% { transform: translateY(-12px) rotate(10deg); }
     }
 
-    /* Hero Wrapper superpuesto al frente */
+    /* Hero Wrapper con animación de entrada inicial */
     .hero-wrapper {
       position: relative;
       display: flex;
@@ -64,11 +64,24 @@
       max-width: 500px;
       margin: 60px auto 50px auto;
       z-index: 100;
+      opacity: 0;
+      animation: cardAppear 1.2s ease-out 0.8s forwards;
     }
 
-    /* Tarjeta Principal con más transparencia para ver la foto de fondo */
+    @keyframes cardAppear {
+      0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    /* Tarjeta Principal */
     .main-card {
-      background: rgba(23, 37, 65, 0.45); /* Mayor transparencia */
+      background: rgba(23, 37, 65, 0.45);
       backdrop-filter: blur(4px);
       border: 3px solid rgba(250, 204, 21, 0.6);
       border-radius: 20px;
@@ -90,9 +103,23 @@
     .main-card p {
       font-size: 1rem;
       line-height: 1.6;
-      color: #ffffff; /* Texto 100% opaco */
+      color: #ffffff;
       margin-bottom: 25px;
       text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+      min-height: 70px; /* Evita saltos de diseño mientras se escribe */
+    }
+
+    /* Cursor parpadeante estilo máquina de escribir */
+    .typewriter-cursor::after {
+      content: '|';
+      animation: blink 0.7s infinite;
+      color: #facc15;
+      font-weight: bold;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
 
     .btn {
@@ -117,7 +144,7 @@
     /* Burbujas laterales/superiores de los personajes */
     .character-bubble {
       position: absolute;
-      top: -40px; /* Posicionadas en la parte superior */
+      top: -40px;
       border-radius: 50%;
       overflow: hidden;
       z-index: 102;
@@ -194,38 +221,39 @@
     .bubble.size-lg { width: 220px; height: 220px; }
     .bubble.size-xl { width: 260px; height: 260px; }
 
+    /* Retraso de inicio de animaciones (aparecen después de la tarjeta) */
     .bubble:nth-child(1) {
       top: 10%; left: 5%;
       animation-duration: 12s;
-      animation-delay: 0s;
+      animation-delay: 2.2s;
       --tx-mid: 40vw; --ty-mid: 30vh;
       --tx-end: 80vw; --ty-end: 60vh;
     }
     .bubble:nth-child(2) {
       top: 70%; left: 10%;
       animation-duration: 14s;
-      animation-delay: 2.5s;
+      animation-delay: 4.5s;
       --tx-mid: 35vw; --ty-mid: -40vh;
       --tx-end: 75vw; --ty-end: -20vh;
     }
     .bubble:nth-child(3) {
       top: 15%; right: 5%;
       animation-duration: 13s;
-      animation-delay: 4.5s;
+      animation-delay: 6.5s;
       --tx-mid: -45vw; --ty-mid: 40vh;
       --tx-end: -80vw; --ty-end: 10vh;
     }
     .bubble:nth-child(4) {
       top: 65%; right: 8%;
       animation-duration: 15s;
-      animation-delay: 1.5s;
+      animation-delay: 3.5s;
       --tx-mid: -30vw; --ty-mid: -50vh;
       --tx-end: -70vw; --ty-end: -10vh;
     }
     .bubble:nth-child(5) {
       top: 40%; left: 45%;
       animation-duration: 11s;
-      animation-delay: 6s;
+      animation-delay: 8s;
       --tx-mid: -35vw; --ty-mid: -30vh;
       --tx-end: 40vw; --ty-end: 40vh;
     }
@@ -330,27 +358,25 @@
 
   <!-- Sección Central -->
   <div class="hero-wrapper">
-    <!-- Burbuja Bob Esponja en la parte superior izquierda -->
+    <!-- Burbuja Bob Esponja -->
     <div class="character-bubble bob-bubble">
       <img src="el.jpg" alt="Bob Esponja">
     </div>
 
-    <!-- Tarjeta Principal con transparencia ajustada -->
+    <!-- Tarjeta Principal -->
     <div class="main-card">
       <h2>¡Para Ti, Arenita! 🌻</h2>
-      <p>
-        Un girasol digital y una aventura submarina para iluminar tu día. Tu sonrisa brilla con la misma fuerza que el sol de Fondo de Bikini. ¡Gracias por existir!
-      </p>
+      <p id="typewriter-text" class="typewriter-cursor"></p>
       <button class="btn" onclick="createFlowerRain()">¡Enviar más Flores de Fondo de Bikini! 🌼</button>
     </div>
 
-    <!-- Burbuja Arenita en la parte superior derecha -->
+    <!-- Burbuja Arenita -->
     <div class="character-bubble sandy-bubble">
       <img src="ella.jpg" alt="Arenita">
     </div>
   </div>
 
-  <!-- Burbujas Flotantes con Marcos y Diferentes Tamaños -->
+  <!-- Burbujas Flotantes -->
   <div class="photo-gallery">
     <div class="bubble size-lg">
       <img src="foto1.jpg" alt="Foto 1">
@@ -370,6 +396,27 @@
   </div>
 
   <script>
+    // Texto para el efecto máquina de escribir
+    const message = "Un girasol digital y una aventura submarina para iluminar tu día. Tu sonrisa brilla con la misma fuerza que el sol de Fondo de Bikini. ¡Gracias por existir!";
+    const textElement = document.getElementById("typewriter-text");
+    let charIndex = 0;
+
+    function typeWriter() {
+      if (charIndex < message.length) {
+        textElement.textContent += message.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeWriter, 35); // Velocidad de escritura
+      } else {
+        // Quita el cursor parpadeante al terminar
+        textElement.classList.remove("typewriter-cursor");
+      }
+    }
+
+    // Inicia la máquina de escribir sincronizada con la entrada de la tarjeta
+    window.addEventListener("DOMContentLoaded", () => {
+      setTimeout(typeWriter, 1800);
+    });
+
     function createFlowerRain() {
       const symbols = ['🌻', '🌼', '✨', '💛', '🪸'];
       for (let i = 0; i < 20; i++) {
