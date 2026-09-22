@@ -106,7 +106,7 @@
       color: #ffffff;
       margin-bottom: 25px;
       text-shadow: 0 1px 3px rgba(0,0,0,0.9);
-      min-height: 70px; /* Evita saltos de diseño mientras se escribe */
+      min-height: 70px;
     }
 
     /* Cursor parpadeante estilo máquina de escribir */
@@ -214,6 +214,7 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       animation: popAndFadeWide ease-in-out infinite;
       opacity: 0;
+      cursor: pointer;
     }
 
     .bubble.size-sm { width: 130px; height: 130px; }
@@ -221,7 +222,6 @@
     .bubble.size-lg { width: 220px; height: 220px; }
     .bubble.size-xl { width: 260px; height: 260px; }
 
-    /* Retraso de inicio de animaciones (aparecen después de la tarjeta) */
     .bubble:nth-child(1) {
       top: 10%; left: 5%;
       animation-duration: 12s;
@@ -311,6 +311,120 @@
       pointer-events: none;
     }
 
+    /* Modal / Pantalla de Burbuja Expandida con Distorsión */
+    .bubble-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(10, 20, 40, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      padding: 20px;
+    }
+
+    .bubble-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .bubble-modal-content {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      max-width: 80vw;
+      max-height: 80vw;
+      border-radius: 50%;
+      border: 6px solid #ffffff;
+      outline: 5px solid rgba(250, 204, 21, 0.9);
+      box-shadow: 
+        0 0 40px rgba(250, 204, 21, 0.8),
+        0 0 80px rgba(100, 200, 255, 0.9),
+        inset 0 0 30px rgba(255, 255, 255, 0.8);
+      overflow: hidden;
+      cursor: pointer;
+      animation: expandDistort 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, floatDistort 4s ease-in-out infinite 0.6s alternate;
+    }
+
+    /* Animación de apertura con distorsión acuosa */
+    @keyframes expandDistort {
+      0% {
+        transform: scale(0.2) rotate(-15deg);
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      }
+      50% {
+        transform: scale(1.15) rotate(10deg);
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+      }
+      100% {
+        transform: scale(1) rotate(0deg);
+        border-radius: 48% 52% 45% 55% / 52% 48% 52% 48%;
+      }
+    }
+
+    /* Animación continua de distorsión fluida/burbujeante */
+    @keyframes floatDistort {
+      0% {
+        border-radius: 48% 52% 45% 55% / 52% 48% 52% 48%;
+        transform: translateY(0px) scale(1);
+      }
+      33% {
+        border-radius: 55% 45% 52% 48% / 45% 55% 48% 52%;
+        transform: translateY(-8px) scale(1.02, 0.98);
+      }
+      66% {
+        border-radius: 42% 58% 48% 52% / 58% 42% 52% 48%;
+        transform: translateY(6px) scale(0.98, 1.02);
+      }
+      100% {
+        border-radius: 50% 50% 55% 45% / 48% 52% 48% 52%;
+        transform: translateY(-4px) scale(1.01, 0.99);
+      }
+    }
+
+    .bubble-modal-content img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .bubble-modal-text {
+      margin-top: 25px;
+      background: rgba(23, 37, 65, 0.85);
+      border: 2px solid #facc15;
+      border-radius: 15px;
+      padding: 15px 25px;
+      max-width: 450px;
+      text-align: center;
+      color: #ffffff;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+      animation: fadeInUp 0.5s ease 0.3s both;
+    }
+
+    .bubble-modal-hint {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: #facc15;
+      opacity: 0.9;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .falling-flower {
       position: fixed;
       top: -20px;
@@ -378,21 +492,32 @@
 
   <!-- Burbujas Flotantes -->
   <div class="photo-gallery">
-    <div class="bubble size-lg">
+    <div class="bubble size-lg" onclick="openBubble('foto1.jpg', '✨ Tu luz ilumina cada rincón de Fondo de Bikini. ¡Un recuerdo maravilloso juntos!')">
       <img src="foto1.jpg" alt="Foto 1">
     </div>
-    <div class="bubble size-xl">
+    <div class="bubble size-xl" onclick="openBubble('foto3.jpg', '🌻 Cada momento a tu lado brilla tanto como los girasoles más radiantes.')">
       <img src="foto3.jpg" alt="Foto 3">
     </div>
-    <div class="bubble size-md">
+    <div class="bubble size-md" onclick="openBubble('foto4.jpg', '💛 Gracias por alegrar mis días con tu hermosa energía y compañía.')">
       <img src="foto4.jpg" alt="Foto 4">
     </div>
-    <div class="bubble size-sm">
+    <div class="bubble size-sm" onclick="openBubble('burbujas.jpg', '🫧 En nuestra propia burbuja, donde los mejores recuerdos jamás se apagan.')">
       <img src="burbujas.jpg" alt="Bob y Arenita en burbuja">
     </div>
-    <div class="bubble size-lg">
+    <div class="bubble size-lg" onclick="openBubble('burbujas1.jpg', '🪸 Una aventura submarina perfecta guardada para siempre en el corazón.')">
       <img src="burbujas1.jpg" alt="Bob y Arenita en la playa">
     </div>
+  </div>
+
+  <!-- Modal para expandir burbuja -->
+  <div class="bubble-modal" id="bubbleModal" onclick="closeBubble()">
+    <div class="bubble-modal-content">
+      <img id="modalImage" src="" alt="Foto expandida">
+    </div>
+    <div class="bubble-modal-text" id="modalText">
+      Dedicatoria especial
+    </div>
+    <div class="bubble-modal-hint">✨ Toca en cualquier lugar para regresar ✨</div>
   </div>
 
   <script>
@@ -405,9 +530,8 @@
       if (charIndex < message.length) {
         textElement.textContent += message.charAt(charIndex);
         charIndex++;
-        setTimeout(typeWriter, 35); // Velocidad de escritura
+        setTimeout(typeWriter, 18); // Velocidad de escritura acelerada
       } else {
-        // Quita el cursor parpadeante al terminar
         textElement.classList.remove("typewriter-cursor");
       }
     }
@@ -416,6 +540,22 @@
     window.addEventListener("DOMContentLoaded", () => {
       setTimeout(typeWriter, 1800);
     });
+
+    // Funciones para la burbuja expandida y distorsionada
+    function openBubble(imageSrc, text) {
+      const modal = document.getElementById('bubbleModal');
+      const modalImg = document.getElementById('modalImage');
+      const modalTxt = document.getElementById('modalText');
+
+      modalImg.src = imageSrc;
+      modalTxt.innerText = text;
+      modal.classList.add('active');
+    }
+
+    function closeBubble() {
+      const modal = document.getElementById('bubbleModal');
+      modal.classList.remove('active');
+    }
 
     function createFlowerRain() {
       const symbols = ['🌻', '🌼', '✨', '💛', '🪸'];
